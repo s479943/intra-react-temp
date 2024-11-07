@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>待辦事項</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" style="position: relative;">
+        <div style="position: relative;">
+            <h1>待辦事項</h1>
+            <button id="addTaskButton" style="position: absolute; bottom: 0; right: 0; background-color: #00ffcc; border-radius: 10px; padding: 0.5rem 1rem;">新增</button>
+        </div>
+        <div style="width: 80vw; height: 3px; background-color: #00ffcc;"></div>
+        <div id="taskList" style="width: 80vw; height: 500px; background-color: #ffffff; border-radius: 10px; margin-top: 10px; display: flex; flex-wrap: wrap;"></div>
+        <div id="taskForm" style="display: none; position: absolute; top: -120px; left: -125px; width: 100vw; height: 100vh; overflow: hidden; background-color: rgba(0, 0, 0, 0.5);">
+            <div style="position: absolute; top: calc(50% - 180px); right: calc(50% - 175px); width: 350px; height: 360px; background-color: #ffffff; border-radius: 10px; padding: 0.5rem 1rem; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);">
+                <div style="display: flex; justify-content: space-between;">
+                    <h2 style="font-size: 20px; font-weight: bold; color: #333333;">新增待辦事項</h2>
+                    <button id="closeFormButton" style="width: 30px; padding: 0; height: 30px; background-color: #00ffcc; margin-top: 0.6rem;">X</button>
+                </div>
+                <form id="taskFormContent" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+                        <label>標題</label>
+                        <input type="text" name="title" placeholder="標題" style="width: 80%;">
+                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+                        <label>完成</label>
+                        <input type="checkbox" name="completed">
+                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+                        <label>標籤</label>
+                        <input type="text" name="tags" placeholder="標籤" style="width: 80%;">
+                    </div>
+                    <div style="width: 100%; display: flex; flex-direction: row; gap: 0.5rem; margin-bottom: 1rem;">
+                        <label>描述</label>
+                        <textarea rows="7" name="description" style="width: 80%;" placeholder="描述"></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+                        <button type="button" id="cancelButton" style="background-color: #ffcc44; border-radius: 10px; padding: 0.5rem 1rem;">取消</button>
+                        <button type="submit" style="background-color: #00ffcc; border-radius: 10px; padding: 0.5rem 1rem;">新增</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
