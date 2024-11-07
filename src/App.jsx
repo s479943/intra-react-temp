@@ -32,16 +32,24 @@ function App() {
     if (e.target.name === 'tags') {
       // 如果tags有值，切分 , 後加入
       setTask({...task, tags: e.target.value.split(',').map((tag) => tag.trim())})
+    } else if (e.target.name === 'completed') {
+      setTask({...task, completed: e.target.checked})
     } else {
       setTask({...task, [e.target.name]: e.target.value})
     }
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    // 加入id
-    const newTask = {...task, id: taskList.length + 1}
-    setShowTask(false)
-    setTaskList([...taskList, newTask])
+    // 確認task有沒有id，有id就更新，沒id就新增
+    if (task.id) {
+      // 更新
+      setShowTask(false)
+      setTaskList(taskList.map((t) => t.id === task.id ? task : t))
+    } else {
+      const newTask = {...task, id: taskList.length + 1}
+      setShowTask(false)
+      setTaskList([...taskList, newTask])
+    }
     setTask(initialTask)
   }
 
@@ -51,6 +59,11 @@ function App() {
         <h1>待辦事項</h1>
         <button onClick={handleShowTask} disabled={showTask} style={{ position: 'absolute', bottom: '0', right: '0', backgroundColor: '#00ffcc', borderRadius: '10px', padding: '0.5rem 1rem', cursor: `${showTask ? 'not-allowed' : 'pointer'}` }}>新增</button>
       </div>
+      {/* 總計 */}
+      <div style={{ width: '80vw', display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem'}}>
+        <div style={{ backgroundColor: '#00ffcc', padding: '0.5rem 1rem', borderRadius: '10px'}}>總計：{taskList.length}</div>
+      </div>
+      {/* 分隔線 */}
       <div style={{ width: '80vw', height: '3px', backgroundColor: '#00ffcc' }}></div>
       <div style={{ width: '80vw', height: '500px', backgroundColor: '#ffffff', borderRadius: '10px', marginTop: '10px', display: 'flex', flexWrap: 'wrap'}}>
         {taskList && taskList.map((task) => (
